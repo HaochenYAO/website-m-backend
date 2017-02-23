@@ -3,7 +3,6 @@ package controllers
 import (
   "fmt"
   "time"
-  "strconv"
   "github.com/revel/revel"
 	"github.com/revel/revel/cache"
   "encoding/json"
@@ -40,14 +39,10 @@ func (c Api) JsonData() revel.Result {
     regions := make(map[string][]models.Regions)
 
     ttl :=  c.Params.Get("ttl")
-    var ttlInt int64 = 86400
 
-    if ttl != "" {
-      ttlInt, _ = strconv.ParseInt(ttl, 10, 64)
-    }
     err := cache.Get("cityData", &regions)
-    // fmt.Println(err)
-    if err == nil && ttlInt != 0 {
+    // fmt.Println(ttl)
+    if err == nil && ttl != "0" && ttl == "" {
       data["code"] = "00000"
       data["msg"] = "success"
       data["result"] = regions
