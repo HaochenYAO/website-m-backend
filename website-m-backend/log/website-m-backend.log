@@ -1,0 +1,139 @@
+ERROR 2017/02/22 14:46:19 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: revel.Config.LoadConfig undefined (type *"github.com/revel/config".Context has no field or method LoadConfig)
+
+ERROR 2017/02/22 14:48:59 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: revel.Config.config undefined (cannot refer to unexported field or method config)
+
+ERROR 2017/02/22 14:49:31 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: undefined: Options
+
+ERROR 2017/02/22 14:49:43 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: not enough arguments in call to revel.Config.Options
+
+ERROR 2017/02/22 14:49:51 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: not enough arguments in call to revel.Config.StringDefault
+
+ERROR 2017/02/22 14:50:03 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: cannot use '1' (type rune) as type string in argument to revel.Config.Options
+
+ERROR 2017/02/22 14:52:55 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: revel.Config.section undefined (cannot refer to unexported field or method section)
+
+ERROR 2017/02/22 14:56:15 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: cannot refer to unexported name revel.section
+github.com/fdd/website-m-backend/app/init.go:33: undefined: revel.section
+
+ERROR 2017/02/22 14:57:21 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: revel.Config.section undefined (cannot refer to unexported field or method section)
+
+ERROR 2017/02/22 15:00:37 # github.com/fdd/website-m-backend/app
+github.com/fdd/website-m-backend/app/init.go:33: undefined: mode
+
+ERROR 2017/02/22 15:33:50 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/db.go:17: undefined: revel in revel.BasePath
+fdd/website-m-backend/libs/db.go:19: undefined: revel in revel.RunMode
+fdd/website-m-backend/libs/db.go:20: undefined: revel in revel.RunMode
+fdd/website-m-backend/libs/db.go:21: undefined: revel in revel.RunMode
+fdd/website-m-backend/libs/db.go:22: undefined: revel in revel.RunMode
+fdd/website-m-backend/libs/db.go:23: undefined: revel in revel.RunMode
+
+ERROR 2017/02/22 15:34:29 # github.com/fdd/website-m-backend/app
+fdd/website-m-backend/app/init.go:4: imported and not used: "fmt"
+
+ERROR 2017/02/22 15:34:47 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/db.go:24: undefined: fmt in fmt.Sprintf
+
+ERROR 2017/02/22 15:34:53 # github.com/fdd/website-m-backend/app
+fdd/website-m-backend/app/init.go:4: imported and not used: "fmt"
+
+ERROR 2017/02/22 18:18:49 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:36: multiple-value netClient.Get() in single-value context
+fdd/website-m-backend/libs/request.go:38: undefined: resp in resp.Body
+fdd/website-m-backend/libs/request.go:39: too many arguments to return
+
+ERROR 2017/02/22 18:19:00 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:36: multiple-value netClient.Get() in single-value context
+fdd/website-m-backend/libs/request.go:38: undefined: resp in resp.Body
+fdd/website-m-backend/libs/request.go:39: too many arguments to return
+
+ERROR 2017/02/22 18:19:21 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:38: undefined: resp in resp.Body
+fdd/website-m-backend/libs/request.go:39: undefined: body
+fdd/website-m-backend/libs/request.go:39: too many arguments to return
+
+ERROR 2017/02/22 18:21:37 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:13: syntax error: unexpected ), expecting [
+fdd/website-m-backend/libs/request.go:14: syntax error: unexpected queryString, expecting ]
+fdd/website-m-backend/libs/request.go:32: syntax error: non-declaration statement outside function body
+
+ERROR 2017/02/22 18:21:53 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:5: imported and not used: "strings"
+fdd/website-m-backend/libs/request.go:31: undefined: config in config.ReadDefault
+fdd/website-m-backend/libs/request.go:42: too many arguments to return
+
+ERROR 2017/02/22 18:21:59 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:30: undefined: config in config.ReadDefault
+fdd/website-m-backend/libs/request.go:41: too many arguments to return
+
+ERROR 2017/02/22 18:22:07 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:42: too many arguments to return
+
+ERROR 2017/02/22 18:22:47 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:42: syntax error: unexpected body at end of statement
+
+ERROR 2017/02/22 18:23:30 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:42: syntax error: unexpected semicolon or newline
+
+ERROR 2017/02/22 18:23:40 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:42: cannot use "" (type string) as type []byte in return argument
+
+ERROR 2017/02/22 18:23:49 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:27: key declared and not used
+fdd/website-m-backend/libs/request.go:27: value declared and not used
+fdd/website-m-backend/libs/request.go:31: err declared and not used
+fdd/website-m-backend/libs/request.go:39: body declared and not used
+
+ERROR 2017/02/22 18:23:56 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:28: err declared and not used
+fdd/website-m-backend/libs/request.go:36: body declared and not used
+
+ERROR 2017/02/22 18:24:16 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:38: non-bool err (type error) used as if condition
+
+ERROR 2017/02/22 18:24:28 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:36: body declared and not used
+
+ERROR 2017/02/22 18:24:35 # github.com/fdd/website-m-backend/libs
+fdd/website-m-backend/libs/request.go:36: no new variables on left side of :=
+
+ERROR 2017/02/22 18:24:48 # github.com/fdd/website-m-backend/app
+fdd/website-m-backend/app/init.go:4: imported and not used: "fmt"
+# github.com/fdd/website-m-backend/app/controllers
+fdd/website-m-backend/app/controllers/app.go:4: imported and not used: "fmt"
+fdd/website-m-backend/app/controllers/app.go:6: imported and not used: "net/http"
+fdd/website-m-backend/app/controllers/app.go:8: imported and not used: "time"
+fdd/website-m-backend/app/controllers/app.go:66: cannot refer to unexported name libs.get
+fdd/website-m-backend/app/controllers/app.go:66: undefined: libs.get
+
+ERROR 2017/02/22 18:25:05 # github.com/fdd/website-m-backend/app/controllers
+fdd/website-m-backend/app/controllers/app.go:4: imported and not used: "fmt"
+fdd/website-m-backend/app/controllers/app.go:6: imported and not used: "net/http"
+fdd/website-m-backend/app/controllers/app.go:8: imported and not used: "time"
+fdd/website-m-backend/app/controllers/app.go:66: cannot refer to unexported name libs.get
+fdd/website-m-backend/app/controllers/app.go:66: undefined: libs.get
+
+ERROR 2017/02/22 18:25:27 # github.com/fdd/website-m-backend/app/controllers
+fdd/website-m-backend/app/controllers/app.go:6: imported and not used: "net/http"
+fdd/website-m-backend/app/controllers/app.go:8: imported and not used: "time"
+fdd/website-m-backend/app/controllers/app.go:66: cannot refer to unexported name libs.get
+fdd/website-m-backend/app/controllers/app.go:66: undefined: libs.get
+
+ERROR 2017/02/22 18:25:34 # github.com/fdd/website-m-backend/app/controllers
+fdd/website-m-backend/app/controllers/app.go:7: imported and not used: "time"
+fdd/website-m-backend/app/controllers/app.go:65: cannot refer to unexported name libs.get
+fdd/website-m-backend/app/controllers/app.go:65: undefined: libs.get
+
+ERROR 2017/02/22 18:25:41 # github.com/fdd/website-m-backend/app/controllers
+fdd/website-m-backend/app/controllers/app.go:63: cannot refer to unexported name libs.get
+fdd/website-m-backend/app/controllers/app.go:63: undefined: libs.get
+
