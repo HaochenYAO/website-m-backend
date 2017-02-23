@@ -1,14 +1,8 @@
 install:
 	@go get gopkg.in/redis.v5
-	@go build -o $GOPATH/bin/train github.com/huacnlee/train/cmd
-	@cd app; go get
+	@go get github.com/go-xorm/xorm
 server:
-	revel run github.com/fdd/website-m-backend
-release:
-	@make assets
-	GOOS=linux GOARCH=amd64 revel package github.com/huacnlee/mediom prod
-assets:
-	@train --source app/assets --out public
+	revel run github.com/website-m-backend
 test:
 	@cd app; go test
 	@cd app/controllers; go test

@@ -2,50 +2,64 @@ package controllers
 
 import (
   "fmt"
+  "time"
+  "strconv"
   "github.com/revel/revel"
+	"github.com/revel/revel/cache"
   "encoding/json"
 
   "github.com/go-xorm/xorm"
-  "github.com/fdd/website-m-backend/libs"
+  "gopkg.in/redis.v5"
+  "github.com/website-m-backend/libs"
+  "github.com/website-m-backend/app/models"
 )
 
 var (
-	engine *xorm.Engine
+  db *xorm.Engine
+  rs *redis.Client
 )
 
 type Api struct {
 	*revel.Controller
 }
 
-type city struct {
-  Id int64 `json:"id"`
-  Name string `json:"name"`
-  Maplat string `json:"maplat"`
-  Maplng string `json:"maplng"`
-  Scope string `json:"scope"`
-  Sort int64 `json:"sort"`
-}
-
-type dataRaw struct {
+type results struct {
   Code string `json:"code"`
-  Data []city `json:"data"`
+  Data []models.Regions `json:"data"`
 }
 
 func (c Api) Index() revel.Result {
-  greeting := "Aloha World"
+  greeting := "Hello World"
   return c.Render(greeting)
 }
 
 func (c Api) JsonData() revel.Result {
-    var s dataRaw
+    var s results
     hotCities := []int64 {121, 3, 267, 2316, 1337, 852}
     data := make(map[string]interface{})
-    regions := make(map[string][]city)
+    regions := make(map[string][]models.Regions)
+
+    ttl :=  c.Params.Get("ttl")
+    var ttlInt int64 = 86400
+
+    if ttl != "" {
+      ttlInt, _ = strconv.ParseInt(ttl, 10, 64)
+    }
+    err := cache.Get("cityData", &regions)
+    // fmt.Println(err)
+    if err == nil && ttlInt != 0 {
+      data["code"] = "00000"
+      data["msg"] = "success"
+      data["result"] = regions
+      return c.RenderJson(data)
+    }
 
 
     body, err := libs.RequestGet("webdata", "/esf/web/getCityList")
     if err != nil {
       fmt.Println(err)
+      data["code"] = "99999"
+      data["msg"] = "server error"
       return c.RenderJson(data)
     }
 
@@ -60,10 +74,11 @@ func (c Api) JsonData() revel.Result {
       regions[v.Scope] = append(regions[v.Scope], v)
     }
 
+    // regionsString, _ := json.Marshal(regions)
+    cache.Set("cityData", regions, 86400 * time.Second)
 
     data["code"] = "00000"
     data["msg"] = "success"
     data["result"] = regions
-
     return c.RenderJson(data)
 }

@@ -10,7 +10,7 @@ import (
 	"github.com/robfig/config"
 )
 
-var client *http.Client
+var httpClient http.Client
 
 func InitClient() {
   transport := &http.Transport{
@@ -19,7 +19,7 @@ func InitClient() {
     DisableCompression: true,
   }
 
-  client = http.Client{
+  httpClient = http.Client{
     Timeout: time.Second * 2,
     Transport: transport,
   }
@@ -32,8 +32,17 @@ func RequestGet(api string, route string) ([]byte, error) {
   port, _ := c.String(revel.RunMode, fmt.Sprintf("%s.port", api))
 
   url := fmt.Sprintf("http://%s:%s%s", host, port, route)
-  resp, err := client.Get(url)
+  resp, err := httpClient.Get(url)
+
+  if err != nil {
+    return []byte{}, err
+  }
   body, err := ioutil.ReadAll(resp.Body)
+
+  if err != nil {
+    return []byte{}, err
+  }
+
   defer resp.Body.Close()
   return body, err
 }

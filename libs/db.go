@@ -9,10 +9,7 @@ import (
 	"github.com/robfig/config"
 )
 
-var (
-	Engine *xorm.Engine
-)
-
+var DbEngine *xorm.Engine
 
 func InitDB() {
 	c, err := config.ReadDefault(revel.BasePath + "/conf/database.conf")
@@ -25,10 +22,10 @@ func InitDB() {
 
 	params := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=true", user, password, host, dbname)
 
-	Engine, err = xorm.NewEngine(driver, params)
-	// defer Engine.Close()
+	DbEngine, err = xorm.NewEngine(driver, params)
+	// defer DbEngine.Close()
 	if err != nil {
 		panic(err)
 	}
-	// Engine.ShowSQL = revel.DevMode
+	// DbEngine.ShowSQL = revel.DevMode
 }

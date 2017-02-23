@@ -2,7 +2,7 @@ package app
 
 import (
   "github.com/revel/revel"
-  "github.com/fdd/website-m-backend/libs"
+  "github.com/website-m-backend/libs"
 )
 
 

@@ -8,13 +8,13 @@ import (
 	"github.com/robfig/config"
 )
 
-var client *redis.Client
+var RedisClient *redis.Client
 
 func InitRedis() {
   c, _ := config.ReadDefault(revel.BasePath + "/conf/database.conf")
   addr, _ := c.String(revel.RunMode, "redis.addr")
 
-	client = redis.NewClient(&redis.Options{
+	RedisClient = redis.NewClient(&redis.Options{
 		Addr:         addr,
 		DialTimeout:  10 * time.Second,
 		ReadTimeout:  30 * time.Second,
