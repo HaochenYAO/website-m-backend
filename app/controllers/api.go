@@ -22,22 +22,31 @@ type Api struct {
 	*revel.Controller
 }
 
-type results struct {
+type regionsRaw struct {
   Code string `json:"code"`
+  Data []models.Regions `json:"data"`
+}
+
+type regionsData struct {
+  Type string `json:"type"`
   Data []models.Regions `json:"data"`
 }
 
 func (c Api) Index() revel.Result {
   greeting := "Hello World"
+	c.Response.ContentType = "text/html; charset=utf-8"
   return c.Render(greeting)
 }
 
 func (c Api) JsonData() revel.Result {
-    var s results
+    var s regionsRaw
     hotCities := []int64 {121, 3, 267, 2316, 1337, 852}
     data := make(map[string]interface{})
-    regions := make(map[string][]models.Regions)
+    tmp := make(map[string][]models.Regions)
+    query := make(map[string]string)
+    regions := []regionsData {}
 
+    query["is_esf"] = "0"
     ttl :=  c.Params.Get("ttl")
 
     err := cache.Get("cityData", &regions)
@@ -49,8 +58,7 @@ func (c Api) JsonData() revel.Result {
       return c.RenderJson(data)
     }
 
-
-    body, err := libs.RequestGet("webdata", "/esf/web/getCityList")
+    body, err := libs.RequestGet("webdata", "/esf/web/getCityList", query)
     if err != nil {
       fmt.Println(err)
       data["code"] = "99999"
@@ -63,10 +71,14 @@ func (c Api) JsonData() revel.Result {
     for _, v := range s.Data {
       for _, h := range hotCities {
         if h == v.Id {
-          regions["热门城市"] = append(regions["热门城市"], v)
+          tmp["热门城市"] = append(tmp["热门城市"], v)
         }
       }
-      regions[v.Scope] = append(regions[v.Scope], v)
+      tmp[v.Scope] = append(tmp[v.Scope], v)
+    }
+
+    for k, v := range tmp {
+      regions = append(regions, regionsData {k, v})
     }
 
     // regionsString, _ := json.Marshal(regions)

@@ -3,6 +3,7 @@ package libs
 import (
   "fmt"
   "net/http"
+  "strings"
   "time"
   "io/ioutil"
 
@@ -26,12 +27,22 @@ func InitClient() {
 }
 
 
-func RequestGet(api string, route string) ([]byte, error) {
+func RequestGet(api string, route string, params map[string]string) ([]byte, error) {
   c, _ := config.ReadDefault(revel.BasePath + "/conf/api.conf")
   host, _ := c.String(revel.RunMode, fmt.Sprintf("%s.host", api))
   port, _ := c.String(revel.RunMode, fmt.Sprintf("%s.port", api))
+  query := []string {}
+  var queryString string = ""
 
-  url := fmt.Sprintf("http://%s:%s%s", host, port, route)
+  for k, v := range params {
+    query = append(query, k + "=" + v)
+  }
+
+  if len(query) > 0 {
+    queryString = "?" + strings.Join(query, "&")
+  }
+
+  url := fmt.Sprintf("http://%s:%s%s%s", host, port, route, queryString)
   resp, err := httpClient.Get(url)
 
   if err != nil {
