@@ -25,8 +25,8 @@ func (t *ApiTest) TestApiGetCities() {
   t.Get("/Api/JsonData")
 
   json.Unmarshal([]byte(t.ResponseBody), &s)
-  t.AssertEqual("00000", s.Code)
-  fmt.Println(s.Code)
+  fmt.Println(s)
+
 	t.AssertOk()
 	// t.AssertContentType("text/html; charset=utf-8")
 }
