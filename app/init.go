@@ -1,10 +1,9 @@
 package app
 
 import (
-  "github.com/revel/revel"
-  "github.com/website-m-backend/libs"
+	"github.com/revel/revel"
+	"github.com/website-m-backend/libs"
 )
-
 
 func init() {
 	// Filters is the default set of global filters.
@@ -26,10 +25,9 @@ func init() {
 	// register startup functions with OnAppStart
 	// ( order dependent )
 	// revel.OnAppStart(InitDB)
-  revel.OnAppStart(func() {
+	revel.OnAppStart(func() {
 		libs.InitDB()
-    libs.InitClient()
-    libs.InitRedis()
+		libs.InitRedis()
 	})
 	// revel.OnAppStart(FillCache)
 }

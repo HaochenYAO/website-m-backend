@@ -1,5 +1,11 @@
 # Logs
 logs
 *.log
+log
 
 .DS_Store
+
+// vendor
+vendor
+
+glide.lock

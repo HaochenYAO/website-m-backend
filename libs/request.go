@@ -1,59 +1,68 @@
 package libs
 
 import (
-  "fmt"
-  "net/http"
-  "strings"
-  "time"
-  "io/ioutil"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"strings"
+	"time"
 
-  "github.com/revel/revel"
+	"github.com/revel/revel"
 	"github.com/robfig/config"
 )
 
-var httpClient http.Client
-
-func InitClient() {
-  transport := &http.Transport{
-    MaxIdleConns: 10,
-    IdleConnTimeout: 30 * time.Second,
-    DisableCompression: true,
-  }
-
-  httpClient = http.Client{
-    Timeout: time.Second * 2,
-    Transport: transport,
-  }
+// HTTPClient client结构体
+type HTTPClient struct {
+	client http.Client
 }
 
+// HTTPHandle http请求处理
+type HTTPHandle interface {
+	Get(string, string, map[string]string) ([]byte, error)
+}
 
-func RequestGet(api string, route string, params map[string]string) ([]byte, error) {
-  c, _ := config.ReadDefault(revel.BasePath + "/conf/api.conf")
-  host, _ := c.String(revel.RunMode, fmt.Sprintf("%s.host", api))
-  port, _ := c.String(revel.RunMode, fmt.Sprintf("%s.port", api))
-  query := []string {}
-  var queryString string = ""
+// CreateHTTPClient 创建client对象
+func CreateHTTPClient() *HTTPClient {
+	transport := &http.Transport{
+		MaxIdleConns:       10,
+		IdleConnTimeout:    30 * time.Second,
+		DisableCompression: true,
+	}
 
-  for k, v := range params {
-    query = append(query, k + "=" + v)
-  }
+	httpClient := http.Client{
+		Timeout:   time.Second * 2,
+		Transport: transport,
+	}
+	return &HTTPClient{httpClient}
+}
 
-  if len(query) > 0 {
-    queryString = "?" + strings.Join(query, "&")
-  }
+func (h *HTTPClient) Get(api string, route string, params map[string]string) ([]byte, error) {
+	c, _ := config.ReadDefault(revel.BasePath + "/conf/api.conf")
+	host, _ := c.String(revel.RunMode, fmt.Sprintf("%s.host", api))
+	port, _ := c.String(revel.RunMode, fmt.Sprintf("%s.port", api))
+	query := []string{}
+	var queryString string
 
-  url := fmt.Sprintf("http://%s:%s%s%s", host, port, route, queryString)
-  resp, err := httpClient.Get(url)
+	for k, v := range params {
+		query = append(query, k+"="+v)
+	}
 
-  if err != nil {
-    return []byte{}, err
-  }
-  body, err := ioutil.ReadAll(resp.Body)
+	if len(query) > 0 {
+		queryString = "?" + strings.Join(query, "&")
+	}
 
-  if err != nil {
-    return []byte{}, err
-  }
+	url := fmt.Sprintf("http://%s:%s%s%s", host, port, route, queryString)
+	resp, err := h.client.Get(url)
 
-  defer resp.Body.Close()
-  return body, err
+	if err != nil {
+		return []byte{}, err
+	}
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		return []byte{}, err
+	}
+
+	defer resp.Body.Close()
+	return body, err
 }

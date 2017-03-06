@@ -4,22 +4,29 @@ package routes
 import "github.com/revel/revel"
 
 
-type tApi struct {}
-var Api tApi
+type tAPI struct {}
+var API tAPI
 
 
-func (_ tApi) Index(
+func (_ tAPI) Index(
 		) string {
 	args := make(map[string]string)
 	
-	return revel.MainRouter.Reverse("Api.Index", args).Url
+	return revel.MainRouter.Reverse("API.Index", args).Url
 }
 
-func (_ tApi) JsonData(
+func (_ tAPI) CityData(
 		) string {
 	args := make(map[string]string)
 	
-	return revel.MainRouter.Reverse("Api.JsonData", args).Url
+	return revel.MainRouter.Reverse("API.CityData", args).Url
+}
+
+func (_ tAPI) NhData(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("API.NhData", args).Url
 }
 
 

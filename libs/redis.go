@@ -1,18 +1,20 @@
 package libs
 
 import (
-  "time"
+	"time"
 
-  "gopkg.in/redis.v5"
-  "github.com/revel/revel"
+	"github.com/revel/revel"
 	"github.com/robfig/config"
+	"gopkg.in/redis.v5"
 )
 
+// RedisClient rs client
 var RedisClient *redis.Client
 
+// InitRedis 初始化
 func InitRedis() {
-  c, _ := config.ReadDefault(revel.BasePath + "/conf/database.conf")
-  addr, _ := c.String(revel.RunMode, "redis.addr")
+	c, _ := config.ReadDefault(revel.BasePath + "/conf/database.conf")
+	addr, _ := c.String(revel.RunMode, "redis.addr")
 
 	RedisClient = redis.NewClient(&redis.Options{
 		Addr:         addr,
